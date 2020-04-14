@@ -35,6 +35,7 @@ def box_plot(I, bounding_boxes, filename, vis_path, flag):
     plt.title(flag + ' example ' + filename)
     plt.savefig(os.path.join(vis_path, flag + filename))
 
+# choose images
 index_easy = [9, 17]
 index_hard = [5, 12, 28]
 

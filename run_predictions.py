@@ -4,11 +4,17 @@ import json
 from PIL import Image
 
 def normalization(I):
+    '''
+    This function normalize picture in windows
+    '''
     I_norm = I.astype(float) * 2/ 255 - 1
     I_norm = I_norm / np.sqrt(np.sum(I_norm * I_norm))
     return I_norm
 
 def smaller(I, k):
+    '''
+    This function reduce the size of the original template
+    '''
     indexm = np.arange(0, np.size(I, 0), k)
     indexn = np.arange(0, np.size(I, 1), k)
     I_smaller = I[indexm, :, :]
@@ -17,6 +23,9 @@ def smaller(I, k):
     return I_smaller
 
 def fatter(I, k):
+    '''
+    This function expand the original template
+    '''
     m = np.size(I, 0)
     n = np.size(I, 1)
     I_bigger = np.zeros([m, k * n, 3])
@@ -107,6 +116,8 @@ def detect_red_light(I):
             target = fatter(target, 2)
             bounding_boxes = match_conv(I, target, bounding_boxes)
         '''
+
+    # delete overlap bounding_boxes
     num = len(bounding_boxes)
     flag = np.zeros(num)
     for index1, box1 in enumerate(bounding_boxes):
